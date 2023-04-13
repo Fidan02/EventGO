@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap');
+
+*{
+    font-family: 'Rubik', sans-serif;
+}
+
+:root{
+    --darkBlue-color: #0F1E33;
+    --mainbg-theme: #070D17;
+    --violetLinear-gradient: linear-gradient(120deg, #6A35EE, #9930EF, #5737EE, #795CEB);
+    --transparentOne-color: #fefdfd18;
+}
+
+.w-30{
+    width: 30%;
+}
+
+.welcome-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--violetLinear-gradient);
+}
+
+.go-login-register-btn{
+    width: 40%;
+    text-decoration: none;
+    background-color: var(--darkBlue-color);
+    color: white;
+    border: 2px solid var(--darkBlue-color);
+    border-radius: 10px;
+    transition: all ease-in-out 0.2s;
+}
+
+.go-login-register-btn:hover{
+    background-color: transparent;
+    border: 2px solid var(--darkBlue-color);
+    transition: all ease-in-out 0.3s;
+}
+
+/* Login Page */
+
+.login-btn{
+    text-decoration: none;
+    background-color: var(--darkBlue-color);
+    color: white;
+    border: 2px solid var(--darkBlue-color);
+    border-radius: 10px;
+    transition: all ease-in-out 0.2s;
+}
+.login-btn:hover{
+    background-color: transparent;
+    border: 2px solid var(--darkBlue-color);
+    transition: all ease-in-out 0.3s;
+}
+
+.main-bg{
+    background-color: var(--mainbg-theme);
+}
+
+
+
+/* Navbar Customization */
+
+.navbarP{
+    background-color: #0F1E33;
+}
+
+.navbarLinksCustom {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #ffffff4d;
+    text-decoration: none;
+}
+
+.navbarLinksCustom:hover{
+    transition: all 0.2s ease-out;
+    color: #ffffff81;
+}
+.dropdown > ul{
+    border: none;
+    border-radius: 10px;
+    background-color: var(--mainbg-theme);
+}
+
+.dropdown-menu > li > a{
+    color: #ffffff4d;
+    background-color: var(--mainbg-theme);
+    border-radius: 5px;
+}
+.dropdown-menu > li > a:hover{
+    transition: all 0.2s ease-out;
+    background-color: #FFF;
+    
+}
+.dropdown-menu > li > form > button{
+    background-color: var(--mainbg-theme);
+    border-radius: 5px;
+    color: #ffffff4d;
+}
+.dropdown-menu > li > form > button:hover{
+    color: red;
+    transition: all 0.2s ease-out;
+}
