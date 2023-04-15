@@ -9,6 +9,8 @@
     --mainbg-theme: #070D17;
     --violetLinear-gradient: linear-gradient(120deg, #6A35EE, #9930EF, #5737EE, #795CEB);
     --transparentOne-color: #fefdfd18;
+    --purpleBlueLinear-gradient: linear-gradient(-90deg, #00EBFF, #A73EE7);
+    --inputbgcolor-gradient: linear-gradient(90deg, #48319da4, #48319d56);
 }
 
 .w-30{
@@ -64,10 +66,23 @@
 
 /* Navbar Customization */
 
+
+
 .navbarP{
     background-color: #0F1E33;
+    position: fixed;
+    border-radius: 0px 10px 10px 0px;
+    
 }
 
+.navbarLinksCustomActive {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: white;
+    text-decoration: none;
+    background: var(--purpleBlueLinear-gradient);
+    border-radius: 10px;
+}
 .navbarLinksCustom {
     display: block;
     padding: 0.5rem 1rem;
@@ -103,4 +118,540 @@
 .dropdown-menu > li > form > button:hover{
     color: red;
     transition: all 0.2s ease-out;
+}
+
+/* Events Page */
+
+.card-img{
+    height: 250px;
+}
+
+.country-city{
+    background-color: #00000085;
+    padding: 0px 5px;
+    border-radius: 9px;
+}
+.event-date{
+    background-color: #00000085;
+    padding: 0px 5px;
+    border-radius: 9px;
+}
+.event-cardTags{
+    background-color: #00000085;
+    padding: 0px 7px;
+    border-radius: 9px;
+}
+
+.singleEventButton > a{
+    align-items: center;
+    background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+    border: 0;
+    border-radius: 8px;
+    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: flex;
+    font-family: Phantomsans, sans-serif;
+    font-size: 18px;
+    justify-content: center;
+    line-height: 5px;
+    width: 70px;
+    padding: 3px;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.singleEventButton > a:active,a:hover {
+    outline: 0;
+}
+
+.singleEventButton > a > span {
+    background-color: rgb(5, 6, 45);
+    padding: 16px 24px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+}
+
+.singleEventButton > a:hover span {
+    background: none;
+}
+
+.singleEventButton > a:active {
+    transform: scale(0.9);
+}
+
+
+/* Single EventPage */
+
+.eventTitle{
+    color: white;
+}
+
+.singleevent-date{
+    color: #ffffff4d;
+}
+.singleevent-startdate{
+    color: white;
+    padding: 3px 5px;
+    background-color: rgba(255, 0, 0, 0.212);
+    border-radius: 10px;
+}
+
+.singleevent-enddate{
+    color: white;
+    padding: 3px 5px;
+    background-color: rgba(21, 255, 0, 0.212);
+    border-radius: 10px;
+}
+
+.singleEventCard-img{
+    width: 600px;
+    max-height: 300px;
+}
+
+.singleevent-edit-btn{
+    background-color: #00000085;
+    padding: 0px 7px;
+    border-radius: 9px;
+}
+
+.singleEventInfo-card{
+    background: var(--violetLinear-gradient);
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.eventbio{
+    height: 100px;
+    overflow: auto;
+    color: white; 
+}
+.eventbio::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.eventbio::-webkit-scrollbar-thumb {
+    background-color: #00000085; 
+    border-radius: 5px;
+}
+
+.eventbio::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.countryAddress{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.Eventaddress{
+    background-color: #00000085;
+    padding: 0px 5px;
+    border-radius: 9px;
+}
+
+.eventTime{
+    display: inline-flex;
+    background-color: #00000077;
+    color: white;
+    padding: 0px 5px;
+    border-radius: 9px;
+    width: auto;
+}
+
+.like-btn > a {
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: var(--darkBlue-color);
+    color: #FFF;
+    border-radius: 50px;
+    font-size: 30px;
+    z-index: 100;
+    border: 1px solid var(--purpleBlueLinear-gradient);
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+.like-btn > a:hover {
+    transform: scale(1.1);
+}
+
+.save-btn > a {
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    right: 40px;
+    background-color: var(--darkBlue-color);
+    color: #FFF;
+    border-radius: 50px;
+    font-size: 30px;
+    z-index: 100;
+    border: 1px solid var(--purpleBlueLinear-gradient);
+    transition: 0.5s;
+    text-decoration: none;
+}
+
+.save-btn > a:hover {
+    transform: scale(1.1);
+}
+
+.attend-btn > a {
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 17px;
+    padding: 0.8em 1.3em 0.8em 0.9em;
+    color: white;
+    background: #ad5389;
+    background: var(--purpleBlueLinear-gradient);
+    border: none;
+    letter-spacing: 0.05em;
+    border-radius: 16px;
+    text-decoration: none;
+}
+
+.attend-btn > a  i {
+    margin-right: 3px;
+    transform: rotate(30deg);
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.attend-btn > a span {
+    transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.attend-btn  a:hover i {
+    transform: translateX(5px) rotate(90deg);
+}
+
+.attend-btn > a:hover span {
+    transform: translateX(7px);
+}
+
+.comment-input > form > input{
+    background: var(--inputbgcolor-gradient);
+    color: white;
+    border: none;
+}
+.comment-input > form > input::placeholder{
+    color: white;
+}
+
+.post-commentbtn{
+    width: 150px;
+    background: var(--violetLinear-gradient);
+    color: white;
+    border: none;
+    border-radius: 9px;
+}
+
+.host-image{
+    height: 80px;
+    width: 80px;
+}
+
+.comment-date{
+    color: white;
+    padding: 2px 3px;
+    background-color: rgba(21, 255, 0, 0.212);
+    border-radius: 10px;
+}
+
+.comment-content{
+    height: 60px;
+    overflow: auto;
+    color: white; 
+}
+
+.comment-content::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.comment-content::-webkit-scrollbar-thumb {
+    background-color: #00000085; 
+    border-radius: 5px;
+}
+
+.comment-content::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.comment{
+    background: var(--darkBlue-color);
+}
+
+.deleteComment{
+    background-color: rgba(255, 0, 0, 0.212);
+    border-radius: 10px;
+    color: white;
+    border: none;
+}
+
+/* Edit Event */
+
+.inputBG > input{
+    background: var(--inputbgcolor-gradient);
+    color: white;
+    border: none;
+}
+.inputBG > textarea{
+    background: var(--inputbgcolor-gradient);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.inputBG > textarea::placeholder{
+    color: white;
+}
+.inputBG > input::placeholder{
+    color: white;
+}
+.form-control{
+    color: white;
+}
+
+.editLeft{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.EditTitle{
+    width: 60%;
+}
+
+.cityEdit{
+    width: 30%;
+}
+
+.countryButton{
+    background: var(--inputbgcolor-gradient);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+}
+
+.cityButton{
+    background: var(--inputbgcolor-gradient);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+}
+
+.Location{
+    border-style: solid;
+    border-width: 2px;
+    border-image: var(--purpleBlueLinear-gradient) 1;
+    border-radius: 20px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.EditTime{
+    width: 60%;
+    border-style: solid;
+    border-width: 2px;
+    border-image: var(--purpleBlueLinear-gradient) 1;
+    border-radius: 20px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.time:before{
+    content: 'Time';
+}
+
+.editRight{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.EditBTN > button{
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background: var(--purpleBlueLinear-gradient);
+    color: white;
+}
+
+
+/* Gallery Page */
+.galleryUserName{
+    background-color: #00000085;
+    border-radius: 9px;
+    padding: 0px 10px;
+}
+
+.galleryCaption{
+    height: 50px;
+    overflow: auto;
+    color: white; 
+}
+.galleryCaption::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.galleryCaption::-webkit-scrollbar-thumb {
+    background-color: #00000085; 
+    border-radius: 5px;
+}
+
+.galleryCaption::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.editGalleryBTN{
+    background-color: #00000085;
+    border-radius: 10px;
+}
+
+/* Friends Page */
+
+.friend-bio{
+    width: 100%;
+    height: 50px;
+    overflow: auto;
+    color: white; 
+    margin-bottom: 1px;
+}
+.friend-bio::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.friend-bio::-webkit-scrollbar-thumb {
+    background-color: #00000085; 
+    border-radius: 5px;
+}
+
+.friend-bio::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.accepted{
+    background: var(--violetLinear-gradient);
+    border-radius: 10px;
+}
+
+.pending{
+    background-color: var(--darkBlue-color);
+    border-radius: 10px;
+}
+
+.suggested-container{
+    background-color: var(--darkBlue-color);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+
+/* Messages Page */
+
+.friends-message{
+    padding: 10px;
+    border-radius: 10px;
+    height: 98vh;
+    background-color: var(--darkBlue-color);
+    overflow: auto;
+}
+.not-selected{
+    background-color: var(--mainbg-theme);
+    border-radius: 10px;
+}
+
+.chatroom{
+    padding: 10px 8px;
+    background-color: #001329;
+    position: relative;
+    border-radius: 10px;
+}
+.chatMessages{
+    height: calc(100% - 40px);
+    overflow-y: auto;
+}
+
+.senderMsg{
+    float: left;
+    clear: both;
+    margin-right: 10px;
+    background-color: var(--darkBlue-color);
+    border-radius: 0px 10px 10px 10px;
+    color: white;
+    padding: 10px 10px;
+}
+
+.recieverMsg{
+    float: right;
+    clear: both;
+    margin-left: 10px;
+    background: var(--violetLinear-gradient);
+    border-radius: 10px 10px 0px 10px;
+    color: white;
+    padding: 10px 10px;
+}
+
+.sendMessage{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px; 
+}
+
+.messageInput > input{
+    border: 2px;
+    border-radius: 0px 0px 0px 0px;
+    background: var(--violetLinear-gradient);
+    color: white;
+}
+.messageInput > input::placeholder{
+    color: white;
+}
+
+.messageInput > input[type="text"] {
+    color: white; /* set the text color to red */
+}
+
+.messageInput > button{
+    background-color: var(--mainbg-theme);
+    border: none;
+    color: white;
+    border-style: solid;
+    border-width: 2px;
+    border-image: var(--purpleBlueLinear-gradient) 1;
+}
+
+.messenger-profile{
+    background: var(--inputbgcolor-gradient);
+    border-radius: 10px;
+}
+
+.messagerGallery{
+    width: 100%;
+    height: 500px;
+    overflow: auto;
+    color: white; 
+    margin-bottom: 1px;
 }

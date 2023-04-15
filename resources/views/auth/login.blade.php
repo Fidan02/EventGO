@@ -39,9 +39,11 @@
                     </a>
                 @endif
 
-                <x-button>
-                    {{ __('Log in') }}
-                </x-button>
+                <button class=" ms-3 w-30" type="submit">
+                    <div class="login-btn p-2">
+                        Login
+                    </div>
+                </button>
             </div>
         </form>
     </x-authentication-card>

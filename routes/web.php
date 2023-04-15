@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\AttendController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\FriendController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SavedEventsController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,24 +25,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Galllery Forum Route
-Route::get('/gallery-forum', function () {
-    return view('galleryPages.index');
-})->name('gallery-forum');
-
-// Attending Events Route
-Route::get('/attending-events', function () {
-    return view('attendingEvents');
-})->name('attending-events');
 
 
-// Homepage route (Dashboard is the home page main)
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('EventPages.dashboard');
-    })->name('dashboard');
+    
+    // Homepage route (Dashboard is the home page main)
+    Route::resource('/home', EventController::class);
+    // Galllery Forum Route
+    Route::resource('/gallery-forum', GalleryController::class);
+
+    // Attending Events Route
+    Route::get('/attending-events/{id}', [AttendController::class, 'index'])->name('attending-events');
+
+    // Messages route
+    Route::get('/chat', [MessageController::class, 'index'])->name('chat');
+
+    // Freinds route
+    Route::get('/friends', [FriendController::class, 'index'])->name('friends');
+
+    // Saved Events route
+    Route::get('/saved-events', [SavedEventsController::class, 'index'])->name('saved-events');
+    
+    // Settings route
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 });

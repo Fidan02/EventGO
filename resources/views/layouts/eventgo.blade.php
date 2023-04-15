@@ -18,7 +18,7 @@
 
                 <!-- Navigation Side Bar -->
             <div style="height: 100vh" class="d-flex flex-column flex-shrink-0 p-3 navbarP" style="width: 280px;">
-                <a href="{{ route('dashboard') }}" class="d-flex w-100 align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <a href="{{ route('home.index') }}" class="d-flex w-100 align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <div class="d-flex align-items-center justify-content-center mt-2 w-100">
                     <img src="{{ asset('images/Logologosm.png') }}" alt="Logo">
                     <span class="fs-4 fw-bold text-light ms-2">EventGO</span>
@@ -27,43 +27,43 @@
                 <br>
                 <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="{{ route('dashboard') }}" class="nav-link active" aria-current="page">
+                    <a href="{{ route('home.index') }}" class="@if (\Request::route()->getName() == 'home.index')  navbarLinksCustomActive @endif @if (\Request::route()->getName() !== 'home.index')  navbarLinksCustom @endif" aria-current="page">
                     <i class="fa-solid fa-house me-2"></i>
                         Home
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('gallery-forum') }}" class="navbarLinksCustom">
+                    <a href="{{ route('gallery-forum.index') }}" class="@if (\Request::route()->getName() == 'gallery-forum.index')  navbarLinksCustomActive @endif @if (\Request::route()->getName() !== 'gallery-forum.index')  navbarLinksCustom @endif">
                     <i class="fa-solid fa-images me-2"></i>
                     Gallery
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('attending-events') }}" class="navbarLinksCustom">
+                    <a href="{{ route('attending-events', ['id' => Auth::user()->id]) }}" class="@if (\Request::route()->getName() == 'attending-events')  navbarLinksCustomActive @endif @if (\Request::route()->getName() !== 'attending-events')  navbarLinksCustom @endif">
                     <i class="fa-solid fa-check-to-slot me-2"></i>
                     Attending
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="navbarLinksCustom">
+                    <a href="{{ route('home.create') }} " class="@if (\Request::route()->getName() == 'home.create')  navbarLinksCustomActive @endif @if (\Request::route()->getName() !== 'home.create')  navbarLinksCustom @endif">
                     <i class="fa-solid fa-square-plus me-2"></i>
                     Create Event
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="navbarLinksCustom">
+                    <a href="{{ route('gallery-forum.create') }}" class="@if (\Request::route()->getName() == 'gallery-forum.create')  navbarLinksCustomActive @endif @if (\Request::route()->getName() !== 'gallery-forum.create')  navbarLinksCustom @endif">
                     <i class="bi bi-columns-gap me-2"></i>
                     Create Gallery
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="navbarLinksCustom">
+                    <a href="{{ route('chat') }}" class="@if (\Request::route()->getName() == 'chat')  navbarLinksCustomActive @endif @if (\Request::route()->getName() !== 'chat')  navbarLinksCustom @endif">
                     <i class="fa-solid fa-message me-2"></i>
                     Messages
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="navbarLinksCustom">
+                    <a href="{{ route('friends') }} " class="@if (\Request::route()->getName() == 'friends')  navbarLinksCustomActive @endif @if (\Request::route()->getName() !== 'friends')  navbarLinksCustom @endif">
                     <i class="fa-solid fa-user me-2"></i>
                         Friends
                     </a>
@@ -76,7 +76,7 @@
                     <strong>{{ Auth::user()->name }}</strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="{{ route('settings')}}">Settings</a></li>
                     <li><a class="dropdown-item" href="{{ route('profile.show')}}">Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>
@@ -94,7 +94,7 @@
 
         <div class="col-10">
             <!-- Page Content -->
-            <div class="my-5">
+            <div class="m-0 p-0">
                 @yield('content')
             </div>
         </div>
