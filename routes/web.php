@@ -5,6 +5,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SavedEventsController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
@@ -53,4 +54,6 @@ Route::middleware([
     
     // Settings route
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 });

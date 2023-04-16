@@ -655,3 +655,50 @@
     color: white; 
     margin-bottom: 1px;
 }
+
+
+/* Profile Page CSS */
+
+.profileFriends_Amount{
+    padding: 6px;
+    background: var(--violetLinear-gradient);
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+.profileEvents{
+    padding: 6px;
+    background: var(--violetLinear-gradient);
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+.profileEDIT{
+    padding: 6px 10px;
+    background: var(--purpleBlueLinear-gradient);
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+.ProfileSavedEvents {
+    padding: 4px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.ProfileSavedEvents::-webkit-scrollbar {
+    width: 10px;
+    height: 5px; 
+}
+
+.ProfileSavedEvents::-webkit-scrollbar-thumb {
+    background: var(--violetLinear-gradient); 
+    border-radius: 5px;
+}
+
+.ProfileSavedEvents::-webkit-scrollbar-track {
+    background-color: transparent;
+}
