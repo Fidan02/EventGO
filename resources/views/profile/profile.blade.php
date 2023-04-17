@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="profileEDIT my-1">
-                <a class="text-light mt-1 fs-5" href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                <a class="text-light mt-1 fs-5" href="{{ route('profile-edit')}}"><i class="fa-solid fa-pen-to-square"></i></a>
                 </div>
             </div>
         </div>

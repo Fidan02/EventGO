@@ -56,4 +56,6 @@ Route::middleware([
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit-profile', [ProfileController::class, 'editProfile'])->name('profile-edit');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('update');
 });

@@ -702,3 +702,49 @@
 .ProfileSavedEvents::-webkit-scrollbar-track {
     background-color: transparent;
 }
+
+/* Edit Profile Page */
+
+.profileInfo{
+    border-style: solid;
+    border-width: 2px;
+    border-image: var(--purpleBlueLinear-gradient) 1;
+}
+
+.updateProfile > button{
+    background: var(--purpleBlueLinear-gradient);
+    border: none;
+    color: white;
+    border-style: solid;
+    border-width: 2px;
+    border: none;
+    border-radius: 9px;
+    padding: 10px;
+}
+
+.customAlert{
+    background: var(--violetLinear-gradient);
+}
+
+.profileName > input {
+    border: 2px;
+    border-radius: 10px;
+    background: var(--violetLinear-gradient);
+    color: white;
+}
+
+.profileName > input[type="text"] {
+    color: white;
+}
+
+.profileBio > textarea {
+    border: 2px;
+    border-radius: 10px;
+    background: var(--violetLinear-gradient);
+    color: white;
+}
+
+.errorAlert > ul{
+    list-style: none;
+
+}
