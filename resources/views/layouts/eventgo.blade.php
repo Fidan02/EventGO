@@ -72,7 +72,7 @@
                 <hr>
                 <div class="dropdown">
                 <a href="#" class="d-flex align-items-center navbarLinksCustom text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('images/'.Auth::user()->image) }}" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <img src="{{ asset('storage/avatars/'.Auth::user()->image) }}" alt="" width="32" height="32" class="rounded-circle me-2 object-fit-cover">
                     <strong>{{ Auth::user()->name }}</strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">

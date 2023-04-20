@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Event;
+use App\Models\Gallery;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
@@ -61,4 +63,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
+    public function gallery(){
+        return $this->hasMany(Gallery::class);
+    }
 }

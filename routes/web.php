@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Fortify\UpdateUserPassword;
 use App\Http\Controllers\AttendController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FriendController;
@@ -58,4 +59,5 @@ Route::middleware([
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/profile/edit-profile', [ProfileController::class, 'editProfile'])->name('profile-edit');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('update');
+    Route::put('/profile/password-update', [ProfileController::class, 'passwordUpdate'])->name('password-update');
 });

@@ -8,7 +8,7 @@
             <div class="profile">
                 <div class="profileImage d-flex align-items-center">
                     <div class="d-flex justify-content-center align-items-center">
-                        <img src="{{ asset('images/'.Auth::user()->image) }}" alt="Host Image" style="width: 100px; height: 100px;">
+                        <img src="{{ asset('storage/avatars/'.Auth::user()->image) }}" alt="Host Image" width="120px" height="120px" class="rounded-circle object-fit-cover">
                     </div>
                     <div class="profileNameBio ms-4">
                         <div class="profileName text-light">

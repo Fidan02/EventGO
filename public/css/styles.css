@@ -742,6 +742,7 @@
     border-radius: 10px;
     background: var(--violetLinear-gradient);
     color: white;
+    padding: 5px;
 }
 
 .errorAlert > ul{
