@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Event;
 use App\Models\Likes;
 use App\Models\Comment;
-use App\Models\Friends;
 use App\Models\Gallery;
 use App\Models\Message;
 use Laravel\Sanctum\HasApiTokens;
@@ -79,16 +78,16 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
     public function savedEvents(){
-        return $this->belongsToMany(SavedEvents::class, 'saved_events');
+        return $this->hasMany(SavedEvents::class);
     }
     public function likes(){
-        return $this->belongsToMany(Likes::class, 'likes');
+        return $this->hasMany(Likes::class);
     }
     public function attending(){
-        return $this->belongsToMany(Attending::class, 'attendings');
+        return $this->hasMany(Attending::class);
     }
     public function friends(){
-        return $this->belongsToMany(Friends::class, 'friends');
+        return $this->belongsToMany(User::class, 'friend_id');
     }
     public function messages(){
         return $this->belongsToMany(Message::class, 'messages');

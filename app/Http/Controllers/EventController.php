@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
+use App\Models\Country;
+use App\Models\Event;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -11,7 +14,10 @@ class EventController extends Controller
      */
     public function index()
     {
-        return view('EventPages.dashboard');
+        $events = Event::all();
+        return view('EventPages.dashboard',[
+            'events' => $events,
+        ]);
     }
 
     /**
@@ -35,15 +41,32 @@ class EventController extends Controller
      */
     public function show(string $id)
     {
-        return view('singleEvent');
+        $event = Event::findOrFail($id);
+        return view('singleEvent', [
+            'event' => $event,
+        ]);
     }
-
+    
+    public function like(string $id)
+    {
+        $event = Event::findOrFail($id);
+        return view('singleEvent', [
+            'event' => $event,
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        return view('EventPages.edit');
+        $event = Event::findOrFail($id);
+        $country = Country::all();
+        $city = City::all();
+        return view('EventPages.edit', [
+            'event' => $event,
+            'country' => $country,
+            'city' => $city,
+        ]);
     }
 
     /**

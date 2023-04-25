@@ -322,6 +322,21 @@
     text-decoration: none;
 }
 
+.activeAttend > a {
+    display: flex;
+    align-items: center;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 17px;
+    padding: 0.8em 1.3em 0.8em 0.9em;
+    color: white;
+    background: var(--darkBlue-color);
+    border: none;
+    letter-spacing: 0.05em;
+    border-radius: 16px;
+    text-decoration: none;
+}
+
 .attend-btn > a  i {
     margin-right: 3px;
     transform: rotate(30deg);

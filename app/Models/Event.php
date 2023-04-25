@@ -30,31 +30,28 @@ class Event extends Model
         'city_id',
         'user_id',
     ];
-
-
     public function users(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function country(){
-        return $this->hasOne(Country::class);
+        return $this->belongsTo(Country::class);
     }
     public function city(){
-        return $this->hasOne(City::class);
+        return $this->belongsTo(City::class);
     }
     public function comments(){
         return $this->hasMany(Comment::class);
     }
-
-    public function tags(){
-        return $this->belongsToMany(Tags::class, 'event__tags');
-    }
     public function savedEvents(){
-        return $this->belongsToMany(SavedEvents::class, 'saved_events');
+        return $this->hasMany(SavedEvents::class);
     }
     public function likes(){
-        return $this->belongsToMany(Likes::class, 'likes');
+        return $this->hasMany(Likes::class);
     }
     public function attending(){
-        return $this->belongsToMany(Attending::class, 'attendings');
+        return $this->hasMany(Attending::class);
+    }
+    public function tags(){
+        return $this->belongsToMany(Tags::class, 'event__tags', 'event_id', 'tag_id');
     }
 }
