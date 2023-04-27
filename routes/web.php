@@ -44,8 +44,9 @@ Route::middleware([
     Route::get('home/{event_id}/save', [EventController::class, 'saveSystem'])->name('home.saveSystem');
     Route::get('home/{event_id}/attend', [EventController::class, 'attendSystem'])->name('home.attendSystem');
     // Galllery Forum Route
-    Route::resource('/gallery-forum', GalleryController::class);
-
+    Route::resource('/gallery-forum', GalleryController::class)->parameters([
+        'gallery-forum' => 'gallery_id'
+    ]);
     // Attending Events Route
     Route::get('/attending-events/{id}', [AttendController::class, 'index'])->name('attending-events');
 

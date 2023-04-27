@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -11,7 +13,10 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        return view('galleryPages.index');
+        $gallery = Gallery::all();
+        return view('galleryPages.index', [
+            'gallery' => $gallery,
+        ]);
     }
 
     /**
@@ -43,7 +48,10 @@ class GalleryController extends Controller
      */
     public function edit(string $id)
     {
-        return view('galleryPages.edit');
+        $gallery = Gallery::findOrFail($id);
+        return view('galleryPages.edit', [
+            'gallery' => $gallery,
+        ]);
     }
 
     /**
@@ -51,7 +59,26 @@ class GalleryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $gallery = Gallery::findOrFail($id);
+        $request->validate([
+            'caption' => ['string', 'max:255'],
+            'image' => ['image']
+        ]);
+        if($request->hasfile('image')){
+            if($gallery->image && Storage::exists('public/gallery/' . $gallery->image)) {
+                Storage::delete('public/gallery/' . $gallery->image);
+            }
+            $file = $request['image']->getClientOriginalName();
+            $image = time()."_".pathinfo($file, PATHINFO_FILENAME) . "." . pathinfo($file, PATHINFO_EXTENSION);
+            $gallery->image = $image;
+            Storage::putFileAs('public/gallery/', $request['image'], $image);
+        }
+        if($gallery->update(['caption' => $request->caption])){
+            dd($request->caption, $gallery->caption);
+            return redirect()->route('gallery-forum.edit', ['gallery_id' => $gallery->id])->with('success', 'Gallery updated successfully.');
+        }else{
+            return redirect()->route('gallery-forum.edit', ['gallery_id' => $gallery->id])->with('error', 'Something went wrong.');
+        }
     }
 
     /**

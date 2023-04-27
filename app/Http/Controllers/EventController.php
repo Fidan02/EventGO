@@ -107,6 +107,12 @@ class EventController extends Controller
 
         return redirect()->route('home.show', ['event_id' => $event->id]);
     }
+
+    // Post Comment Functionality
+
+    public function postComment($id){
+        $event = Event::findOrFail($id);
+    }
     /**
      * Show the form for editing the specified resource.
      */

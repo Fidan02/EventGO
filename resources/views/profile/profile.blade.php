@@ -56,7 +56,7 @@
                                         <h6>This is an Event Title</h6>
                                     </div>
                                     <div class="singleEventButton mt-2">
-                                        <a href="{{ route('home.show', ['home' => 'anythign']) }}">
+                                        <a href="{{ route('home.show', ['event_id' => 'anythign']) }}">
                                             <span class="text-center">
                                                 <i class="fa-solid fa-chevron-right"></i>
                                             </span>
@@ -84,7 +84,7 @@
                                         <h6>This is an Event Title</h6>
                                     </div>
                                     <div class="singleEventButton mt-2">
-                                        <a href="{{ route('home.show', ['home' => 'anythign']) }}">
+                                        <a href="{{ route('home.show', ['event_id' => 'anythign']) }}">
                                             <span class="text-center">
                                                 <i class="fa-solid fa-chevron-right"></i>
                                             </span>
@@ -111,7 +111,7 @@
                                         <h6>This is an Event Title</h6>
                                     </div>
                                     <div class="singleEventButton mt-2">
-                                        <a href="{{ route('home.show', ['home' => 'anythign']) }}">
+                                        <a href="{{ route('home.show', ['event_id' => 'anythign']) }}">
                                             <span class="text-center">
                                                 <i class="fa-solid fa-chevron-right"></i>
                                             </span>
@@ -138,7 +138,7 @@
                                         <h6>This is an Event Title</h6>
                                     </div>
                                     <div class="singleEventButton mt-2">
-                                        <a href="{{ route('home.show', ['home' => 'anythign']) }}">
+                                        <a href="{{ route('home.show', ['event_id' => 'anythign']) }}">
                                             <span class="text-center">
                                                 <i class="fa-solid fa-chevron-right"></i>
                                             </span>
@@ -177,12 +177,12 @@
                             <div class="d-flex gap-2">
                                 <div class="container editGalleryBTN">
                                     <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_forum' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
+                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
                                     </h6>
                                 </div>
                                 <div class="container editGalleryBTN">
                                     <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_forum' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
                                     </h6>
                                 </div>
                             </div>
@@ -208,12 +208,12 @@
                             <div class="d-flex gap-2">
                                 <div class="container editGalleryBTN">
                                     <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_forum' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
+                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
                                     </h6>
                                 </div>
                                 <div class="container editGalleryBTN">
                                     <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_forum' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
                                     </h6>
                                 </div>
                             </div>
@@ -240,12 +240,12 @@
                             <div class="d-flex gap-2">
                                 <div class="container editGalleryBTN">
                                     <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_forum' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
+                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
                                     </h6>
                                 </div>
                                 <div class="container editGalleryBTN">
                                     <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_forum' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
                                     </h6>
                                 </div>
                             </div>
