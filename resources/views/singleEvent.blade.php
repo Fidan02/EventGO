@@ -22,7 +22,7 @@
                 <div class="d-flex justify-content-between">
                 @if(Auth::user()->id === $event->user_id)
                     <div class="singleevent-edit-btn "> 
-                        <a class="text-light mt-1 fs-5" href="{{ route('home.edit', ['home' => $event->id])}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a class="text-light mt-1 fs-5" href="{{ route('home.edit', ['event_id' => $event->id])}}"><i class="fa-solid fa-pen-to-square"></i></a>
                     </div>
                 @endif
                 </div>
@@ -63,34 +63,48 @@
     <div class="container d-flex justify-content-between my-3">
         <div class="like-save-attend w-50 d-flex gap-3">
             <div class="like-btn">
-                <a href="#" class="d-flex justify-content-center flex-column align-items-center">
+                <a href="{{ route('home.likeSystem', ['event_id' => $event->id]) }}" class="d-flex justify-content-center flex-column align-items-center">
                     @php
-                        $likes = $event->likes()->where('user_id', auth()->id())->first();
-                        $icon = is_null($likes) || is_null($likes->like) ? 'text-light fa-regular fa-heart' : 'text-danger fa-solid fa-heart';
+                        $likes = $event->likes()->where('user_id', auth()->id())->where('event_id', $event->id)->first();
+                        $icon = 'text-light fa-regular fa-heart';
+
+                        if(!is_null($likes) && $likes->like == 1){
+                            $icon = 'text-danger fa-solid fa-heart';
+                        }
                     @endphp
                     <i class="{{ $icon }}"></i>
-                    <span class="text-light" style="font-size: 12px;">{{ $event->likes()->count() }}</span>
+                    <span class="text-light" style="font-size: 12px;">{{ $event->likes()->where('like', 1)->count() }}</span>
                 </a>
             </div>
             <div class="save-btn">
                 @php 
-                    $saved = $event->savedEvents()->where('user_id', auth()->id())->first();
-                    $is_saved = (is_null($saved) || is_null($saved->user_id === auth()->id())) ? 'text-light fa-regular fa-bookmark' : 'text-primary fa-solid fa-bookmark';
+                    $saved = $event->savedEvents()->where('user_id', auth()->id())->where('event_id', $event->id)->first();
+                    $is_saved = 'text-light fa-regular fa-bookmark';
+
+                    if(!is_null($saved) && $saved->user_id == auth()->id()){
+                        $is_saved =  'text-primary fa-solid fa-bookmark';
+                    }
                 @endphp
-                <a href="#" class="d-flex flex-column justify-content-center align-items-center">
+                <a href="{{ route('home.saveSystem', ['event_id' => $event->id])}}" class="d-flex flex-column justify-content-center align-items-center">
                     <i class="{{ $is_saved }}"></i>
                     <span class="text-light" style="font-size: 12px;">{{ $event->savedEvents()->count() }}</span>
                 </a>
             </div>
 
             @php 
-                $attending = $event->attending()->where('user_id', auth()->id())->first();
-                $is_attending = (is_null($attending) || is_null($attending->user_id === auth()->id())) ? 'attend-btn' : 'activeAttend';
-                $icon = (is_null($attending) || is_null($attending->user_id === auth()->id())) ? 'fa-solid fa-arrow-up' : 'fa-sharp fa-solid fa-xmark';
-                $message = (is_null($attending) || is_null($attending->user_id === auth()->id())) ? 'Attend' : 'Attending';
+                $attending = $event->attending()->where('user_id', auth()->id())->where('event_id', $event->id)->first();
+                $is_attending = 'attend-btn';
+                $icon = 'fa-solid fa-arrow-up';
+                $message =  'Attend';
+
+                if(!is_null($attending) && $attending->user_id == auth()->id()){
+                    $is_attending = 'activeAttend';
+                    $icon = 'fa-sharp fa-solid fa-xmark';
+                    $message = 'Attending';
+                }
             @endphp
             <div class="{{ $is_attending}}">
-                <a href="#">
+                <a href="{{ route('home.attendSystem', ['event_id' => $event->id])}}">
                     <i class="{{ $icon }}"></i>
                     <span class="ms-1">{{ $message }}</span>
                 </a>

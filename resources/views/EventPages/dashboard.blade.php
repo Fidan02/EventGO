@@ -40,7 +40,7 @@
                                     </div>
                                     <!-- Button To go the event -->
                                     <div class="singleEventButton mt-2">
-                                        <a href="{{ route('home.show', ['home' => $event->id]) }}">
+                                        <a href="{{ route('home.show', ['event_id' => $event->id]) }}">
                                             <span class="text-center">
                                                 <i class="fa-solid fa-chevron-right"></i>
                                             </span>

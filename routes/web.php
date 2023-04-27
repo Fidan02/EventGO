@@ -37,7 +37,12 @@ Route::middleware([
 ])->group(function () {
     
     // Homepage route (Dashboard is the home page main)
-    Route::resource('/home', EventController::class);
+    Route::resource('/home', EventController::class)->parameters([
+        'home' => 'event_id'
+    ]);
+    Route::get('home/{event_id}/like', [EventController::class, 'likeSystem'])->name('home.likeSystem');
+    Route::get('home/{event_id}/save', [EventController::class, 'saveSystem'])->name('home.saveSystem');
+    Route::get('home/{event_id}/attend', [EventController::class, 'attendSystem'])->name('home.attendSystem');
     // Galllery Forum Route
     Route::resource('/gallery-forum', GalleryController::class);
 
