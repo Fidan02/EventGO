@@ -8,14 +8,14 @@
             <div class="profile">
                 <div class="profileImage d-flex align-items-center">
                     <div class="d-flex justify-content-center align-items-center">
-                        <img src="{{ asset('storage/avatars/'.Auth::user()->image) }}" alt="Host Image" width="120px" height="120px" class="rounded-circle object-fit-cover">
+                        <img src="{{ asset('storage/avatars/'.$users->image) }}" alt="Host Image" width="120px" height="120px" class="rounded-circle object-fit-cover">
                     </div>
                     <div class="profileNameBio ms-4">
                         <div class="profileName text-light">
-                            <h2>{{ Auth::user()->name }}</h2>
+                            <h2>{{ $users->name }}</h2>
                         </div>
                         <div class="profile-bio text-light small">
-                            {{ Auth::user()->bio }}
+                            {{ $users->bio }}
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,11 @@
             <div class="profileEditBTN d-flex align-items-center">
                 <div class="container">
                     <div class="profileFriends_Amount my-1">
-                        <a href="{{ route('friends') }}" class="text-decoration-none text-light">Friends: 10</a>
+                        <a href="{{ route('friends') }}" class="text-decoration-none text-light">Friends:
+                            @if($users->friends->count() > 0)
+                                {{ $users->friends->count() }}
+                            @endif
+                        </a>
                     </div>
                     <div class="profileEvents my-1">
                         <a href="" class="text-decoration-none text-light">Events: 10</a>
@@ -38,228 +42,85 @@
 
         <div class="saved-events my-5">
             <h3 class="text-light">Saved Events:</h3>
-                <div class="ProfileSavedEvents d-flex gap-2 container">
-                    <div class="card bg-dark text-white" style="max-width: 400px; min-width: 400px;">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/017.webp" class="card-img" alt="Stony Beach"/>
-                        <div class="card-img-overlay d-flex flex-column">
-                            <!-- For the country and date -->
-                            <div class="d-flex justify-content-between">
-                                <div class="country-city">
-                                    <h6 class="text-light mt-1">Skopje, North Macedonia</h6>
-                                    <h6 class="text-light mt-1">12/21/2023</h6>
+                @if(!is_null($users->savedEvents) && count($users->savedEvents) > 0)
+                    <div class="ProfileSavedEvents d-flex gap-2 container">
+                        @foreach($users->savedEvents as $user)
+                            <div class="card bg-dark text-white" style="max-width: 400px; min-width: 400px;">
+                                <img src="{{ asset('storage/events/'. $user->image) }}" class="card-img object-fit-cover" alt="{{ $user->image }}"/>
+                                <div class="card-img-overlay d-flex flex-column">
+                                    <div class="d-flex justify-content-between">
+                                                <div class="country-city">
+                                                    <h6 class="text-light mt-1">{{ $user->country->country_name }}, {{ $user->city->city_name }}</h6>
+                                                    <h6 class="text-light mt-1">{{ $user->start_date }}</h6>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-auto">
+                                            <div class="d-flex w-100 align-items-center justify-content-between ">
+                                            <div class="d-flex">
+                                                <h6>{{ $user->title }}</h6>
+                                            </div>
+                                            <div class="singleEventButton mt-2">
+                                                <a href="{{ route('home.show', ['event_id' => $user->id]) }}">
+                                                    <span class="text-center">
+                                                        <i class="fa-solid fa-chevron-right"></i>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-between mt-auto">
-                                <!-- Tags and Title -->
-                                <div class="d-flex w-100 align-items-center justify-content-between ">
-                                    <div class="d-flex">
-                                        <h6>This is an Event Title</h6>
-                                    </div>
-                                    <div class="singleEventButton mt-2">
-                                        <a href="{{ route('home.show', ['event_id' => 'anythign']) }}">
-                                            <span class="text-center">
-                                                <i class="fa-solid fa-chevron-right"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <!-- Second -->
-                    <div class="card bg-dark text-white" style="max-width: 400px; min-width: 400px;">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/017.webp" class="card-img" alt="Stony Beach"/>
-                        <div class="card-img-overlay d-flex flex-column">
-                            <!-- For the country and date -->
-                            <div class="d-flex justify-content-between">
-                                <div class="country-city">
-                                    <h6 class="text-light mt-1">Skopje, North Macedonia</h6>
-                                    <h6 class="text-light mt-1">12/21/2023</h6>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-auto">
-                                <!-- Tags and Title -->
-                                <div class="d-flex w-100 align-items-center justify-content-between ">
-                                    <div class="d-flex">
-                                        <h6>This is an Event Title</h6>
-                                    </div>
-                                    <div class="singleEventButton mt-2">
-                                        <a href="{{ route('home.show', ['event_id' => 'anythign']) }}">
-                                            <span class="text-center">
-                                                <i class="fa-solid fa-chevron-right"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                @else
+                    <div class="container my-3 text-light">
+                        <p class="ms-2">0 Saved Posts</p>
                     </div>
-                    <div class="card bg-dark text-white" style="max-width: 400px; min-width: 400px;">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/017.webp" class="card-img" alt="Stony Beach"/>
-                        <div class="card-img-overlay d-flex flex-column">
-                            <!-- For the country and date -->
-                            <div class="d-flex justify-content-between">
-                                <div class="country-city">
-                                    <h6 class="text-light mt-1">Skopje, North Macedonia</h6>
-                                    <h6 class="text-light mt-1">12/21/2023</h6>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-auto">
-                                <!-- Tags and Title -->
-                                <div class="d-flex w-100 align-items-center justify-content-between ">
-                                    <div class="d-flex">
-                                        <h6>This is an Event Title</h6>
-                                    </div>
-                                    <div class="singleEventButton mt-2">
-                                        <a href="{{ route('home.show', ['event_id' => 'anythign']) }}">
-                                            <span class="text-center">
-                                                <i class="fa-solid fa-chevron-right"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-dark text-white" style="max-width: 400px; min-width: 400px;">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/017.webp" class="card-img" alt="Stony Beach"/>
-                        <div class="card-img-overlay d-flex flex-column">
-                            <!-- For the country and date -->
-                            <div class="d-flex justify-content-between">
-                                <div class="country-city">
-                                    <h6 class="text-light mt-1">Skopje, North Macedonia</h6>
-                                    <h6 class="text-light mt-1">12/21/2023</h6>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-auto">
-                                <!-- Tags and Title -->
-                                <div class="d-flex w-100 align-items-center justify-content-between ">
-                                    <div class="d-flex">
-                                        <h6>This is an Event Title</h6>
-                                    </div>
-                                    <div class="singleEventButton mt-2">
-                                        <a href="{{ route('home.show', ['event_id' => 'anythign']) }}">
-                                            <span class="text-center">
-                                                <i class="fa-solid fa-chevron-right"></i>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                @endif
+            </div>
 
-
-
-
-
-
-
-
-
-                </div><!-- Container-->
-        </div>
-
-        <div class="profileGallery my-5">
+        <div class="profileGallery my-5 text-center">
             <div class="profileEvents d-inline-flex my-1">
-                <a href="" class="text-decoration-none text-light ">Gallery: 10</a>
+                <span class="text-decoration-none text-light ">Gallery: {{ $users->galleries->count() }}</span>
             </div>
             
-            <div class="ProfileSavedEvents d-flex gap-2 container">
-            <div class="card bg-dark text-white" style="min-width: 400px; max-width: 400px;">
-                    <img src="https://mdbcdn.b-cdn.net/img/new/slides/017.webp" class="card-img" alt="Stony Beach"/>
-                    <div class="card-img-overlay d-flex flex-column">
-                        <!-- For the country and date -->
-                        <div class="d-flex justify-content-between">
-                            <div class="galleryUserName d-flex align-items-center">
-                                <h6 class="text-light mt-1">User Name</h6>
-                            </div>
-                            <div class="d-flex gap-2">
-                                <div class="container editGalleryBTN">
-                                    <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
-                                    </h6>
-                                </div>
-                                <div class="container editGalleryBTN">
-                                    <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-auto">
-                            <div class="d-flex align-items-center galleryUserName">
-                                <div class="galleryCaption d-flex align-items-end">
-                                    <p>This is a caption</p>
+            @if(!is_null($users->galleries) && count($users->galleries) > 0)
+            <div class="w-100 my-3 d-flex flex-wrap justify-content-center gap-3 container">
+                @foreach($users->galleries as $gl)
+                    <div class="card bg-dark text-white" style="min-width: 400px; max-width: 400px;">
+                        <img src="{{ asset('storage/gallery/'. $gl->image)}}" class="card-img" alt="Stony Beach"/>
+                        <div class="card-img-overlay d-flex flex-column">
+                            <!-- For the country and date -->
+                            <div class="d-flex justify-content-end">
+                                <div class="d-flex gap-2">
+                                    <div class="container editGalleryBTN">
+                                        <h6 class="text-light mt-2">
+                                        <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
+                                        </h6>
+                                    </div>
+                                    <div class="container editGalleryBTN">
+                                        <h6 class="text-light mt-2">
+                                        <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        </h6>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div> <!-- First Card-->
-
-                <div class="card bg-dark text-white" style="min-width: 400px; max-width: 400px;">
-                    <img src="https://mdbcdn.b-cdn.net/img/new/slides/017.webp" class="card-img" alt="Stony Beach"/>
-                    <div class="card-img-overlay d-flex flex-column">
-                        <!-- For the country and date -->
-                        <div class="d-flex justify-content-between">
-                            <div class="galleryUserName d-flex align-items-center">
-                                <h6 class="text-light mt-1">User Name</h6>
-                            </div>
-                            <div class="d-flex gap-2">
-                                <div class="container editGalleryBTN">
-                                    <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
-                                    </h6>
-                                </div>
-                                <div class="container editGalleryBTN">
-                                    <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-auto">
-                            <div class="d-flex align-items-center galleryUserName">
-                                <div class="galleryCaption d-flex align-items-end">
-                                    <p>This is a caption</p>
+                            <div class="d-flex justify-content-between mt-auto">
+                                <div class="d-flex align-items-center">
+                                    <div class="galleryUserName galleryCaption p-1">
+                                        <p class="small">{{ $gl->caption }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-                <div class="card bg-dark text-white" style="min-width: 400px; max-width: 400px;">
-                    <img src="https://mdbcdn.b-cdn.net/img/new/slides/017.webp" class="card-img" alt="Stony Beach"/>
-                    <div class="card-img-overlay d-flex flex-column">
-                        <!-- For the country and date -->
-                        <div class="d-flex justify-content-between">
-                            <div class="galleryUserName d-flex align-items-center">
-                                <h6 class="text-light mt-1">User Name</h6>
-                            </div>
-                            <div class="d-flex gap-2">
-                                <div class="container editGalleryBTN">
-                                    <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
-                                    </h6>
-                                </div>
-                                <div class="container editGalleryBTN">
-                                    <h6 class="text-light mt-2">
-                                    <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    </h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-between mt-auto">
-                            <div class="d-flex align-items-center galleryUserName">
-                                <div class="galleryCaption d-flex align-items-end">
-                                    <p>This is a caption</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
+            @else
+                <div class="container my-3 text-light">
+                    <p class="ms-2">0 Galleries</p>
+                </div>
+            @endif
         </div><!-- Gallery Container  -->
     </div>
 @endsection

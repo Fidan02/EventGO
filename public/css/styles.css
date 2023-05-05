@@ -542,6 +542,12 @@
     background-color: #00000085;
     border-radius: 10px;
 }
+.deleteGalleryBTN{
+    border: none;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
 
 /* Friends Page */
 

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Friends extends Model
 {
@@ -14,4 +15,5 @@ class Friends extends Model
         'user_id',
         'friend_id',
     ];
+
 }

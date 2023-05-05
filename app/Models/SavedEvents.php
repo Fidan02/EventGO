@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class SavedEvents extends Model
 {
     use HasFactory;
-    
     protected $fillable = [
         'user_id', 
         'event_id',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,10 @@ class ProfileController extends Controller
     use PasswordValidationRules;
 
     function index(){
-        return view('profile.profile');
+        $users = User::where('id', auth()->id())->first();
+        return view('profile.profile', [
+            'users' => $users,
+        ]);
     }
 
     function editProfile(){

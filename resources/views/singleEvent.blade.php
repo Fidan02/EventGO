@@ -3,6 +3,16 @@
 @section('title', 'SingleEvent')
 
 @section('content')
+        @if ($errors->any())
+            <div class="alert alert-danger errorAlert alert-dismissible fade my-5 mx-4 show" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li> 
+                    @endforeach
+                </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
     <div class="container my-4 d-flex justify-content-between">
         <div class="eventTitle">
             <h1>{{ $event->title }}</h1>
@@ -77,12 +87,15 @@
                 </a>
             </div>
             <div class="save-btn">
-                @php 
-                    $saved = $event->savedEvents()->where('user_id', auth()->id())->where('event_id', $event->id)->first();
+                @php
+                    $saved = $event->savedEvents()
+                                ->wherePivot('user_id', auth()->id())
+                                ->wherePivot('event_id', $event->id)
+                                ->first();
                     $is_saved = 'text-light fa-regular fa-bookmark';
 
-                    if(!is_null($saved) && $saved->user_id == auth()->id()){
-                        $is_saved =  'text-primary fa-solid fa-bookmark';
+                    if(!is_null($saved)){
+                        $is_saved = 'text-primary fa-solid fa-bookmark';
                     }
                 @endphp
                 <a href="{{ route('home.saveSystem', ['event_id' => $event->id])}}" class="d-flex flex-column justify-content-center align-items-center">
@@ -92,12 +105,15 @@
             </div>
 
             @php 
-                $attending = $event->attending()->where('user_id', auth()->id())->where('event_id', $event->id)->first();
+                $attending = $event->attending()
+                            ->wherePivot('user_id', auth()->id())
+                            ->wherePivot('event_id', $event->id)
+                            ->first();
                 $is_attending = 'attend-btn';
                 $icon = 'fa-solid fa-arrow-up';
                 $message =  'Attend';
 
-                if(!is_null($attending) && $attending->user_id == auth()->id()){
+                if(!is_null($attending)){
                     $is_attending = 'activeAttend';
                     $icon = 'fa-sharp fa-solid fa-xmark';
                     $message = 'Attending';
@@ -111,12 +127,16 @@
             </div>
         </div>
 
+        <!-- Comment Input -->
         <div class="container d-flex justify-content-center align-items-center w-50">
             <div class="comment-input">
-                <form action="" class="d-flex gap-2">
-                    <input type="text" class="form-control text-light" name="comment" id="comment" placeholder="Comment">
-                    <button class="post-commentbtn" type="submit">Post</button>
-                </form>
+                @auth 
+                    <form action="{{ route('home.commentEvent', ['event_id' => $event->id]) }}" class="d-flex gap-2" method="POST">
+                        @csrf
+                        <input type="text" class="form-control text-light" name="comment" id="comment" placeholder="Comment">
+                        <button class="post-commentbtn" type="submit">Post</button>
+                    </form>
+                @endauth
             </div>
         </div>
     </div>
@@ -150,7 +170,7 @@
                     <div class="container comment d-flex my-2 rounded ">
                         <div class="comment-image">
                             <a href="#" class="host-image d-flex align-items-center container mt-2">
-                                <img src="{{ asset('storage/avatars/'.$comment->users->image) }}" alt="Host Image" style="width: 50px; height: 50px;">
+                                <img src="{{ asset('storage/avatars/'.$comment->users->image) }}" alt="Host Image" class="rounded-circle object-fit-cover" style="width: 50px; height: 50px;">
                             </a>
                         </div>
                         <div class="content w-100">
@@ -162,7 +182,9 @@
                                     <div class="date-delete d-flex gap-1">
                                     @if(Auth::user()->id === $comment->user_id)
                                         <div class="delete">
-                                            <form action="#">
+                                            <form action="{{ route('home.removeComment', ['event_id' => $comment->id])}}" method="GET">
+                                                @method('DELETE')
+                                                @csrf
                                                 <button class="deleteComment" type="submit">Delete</button>
                                             </form>
                                         </div>

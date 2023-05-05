@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attending;
 use App\Models\City;
 use App\Models\Event;
 use App\Models\Likes;
+use App\Models\Comment;
 use App\Models\Country;
+use App\Models\Attending;
 use App\Models\SavedEvents;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -108,11 +110,30 @@ class EventController extends Controller
         return redirect()->route('home.show', ['event_id' => $event->id]);
     }
 
-    // Post Comment Functionality
+    // Event Comment Functionality
+    public function commentEvent(Request $req ,$id){
+        $req->validate([
+            'comment' => ['string', 'max:255', 'required'],
+        ]);
 
-    public function postComment($id){
-        $event = Event::findOrFail($id);
+
+        if(Comment::create(['content' => $req->comment, 'user_id' => auth()->id(), 'event_id' => intval($id)])){
+            return redirect()->back();
+        }
+
+        return redirect()->back()->with('status', 'Something went wrong');
     }
+    // Remove Comment
+    public function removeComment($id){
+
+        $comment = Comment::findOrFail($id);
+        if($comment->delete()){
+            return redirect()->back();
+        }
+
+        return redirect()->back()->with('status', 'Something went wrong');
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

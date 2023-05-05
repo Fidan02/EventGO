@@ -64,17 +64,20 @@ class GalleryController extends Controller
             'caption' => ['string', 'max:255'],
             'image' => ['image']
         ]);
-        if($request->hasfile('image')){
+        
+        if($request->hasfile('gallery_image')){
             if($gallery->image && Storage::exists('public/gallery/' . $gallery->image)) {
                 Storage::delete('public/gallery/' . $gallery->image);
             }
-            $file = $request['image']->getClientOriginalName();
+            $file = $request['gallery_image']->getClientOriginalName();
             $image = time()."_".pathinfo($file, PATHINFO_FILENAME) . "." . pathinfo($file, PATHINFO_EXTENSION);
             $gallery->image = $image;
-            Storage::putFileAs('public/gallery/', $request['image'], $image);
+            Storage::putFileAs('public/gallery/', $request['gallery_image'], $image);
         }
-        if($gallery->update(['caption' => $request->caption])){
-            dd($request->caption, $gallery->caption);
+
+        $gallery->caption = $request->caption;
+        
+        if($gallery->update()){
             return redirect()->route('gallery-forum.edit', ['gallery_id' => $gallery->id])->with('success', 'Gallery updated successfully.');
         }else{
             return redirect()->route('gallery-forum.edit', ['gallery_id' => $gallery->id])->with('error', 'Something went wrong.');
@@ -86,6 +89,13 @@ class GalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $gallery = Gallery::findOrFail($id);
+
+
+        if($gallery->delete()){
+            return redirect()->route('gallery-forum.index')->with('success', 'Gallery deleted successfully.');
+        }else{
+            return redirect()->route('gallery-forum.index')->with('error', 'Something went wrong.');
+        }
     }
 }

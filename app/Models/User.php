@@ -78,16 +78,21 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
     public function savedEvents(){
-        return $this->hasMany(SavedEvents::class);
+        return $this->belongsToMany(Event::class, 'saved_events');
     }
     public function likes(){
         return $this->hasMany(Likes::class);
     }
-    public function attending(){
-        return $this->hasMany(Attending::class);
+    public function attendingEvents(){
+        return $this->belongsToMany(Event::class, 'attendings');
     }
     public function friends(){
-        return $this->belongsToMany(User::class, 'friend_id');
+        return $this->belongsToMany(User::class, 'friends', 'user_id','friend_id')
+                                    ->wherePivot('status', 'accepted');
+    }
+    public function friendRequests(){
+        return $this->belongsToMany(User::class, 'friends', 'user_id','friend_id')
+        ->wherePivot('status', 'pending');
     }
     public function messages(){
         return $this->belongsToMany(Message::class, 'messages');

@@ -43,19 +43,23 @@ Route::middleware([
     Route::get('home/{event_id}/like', [EventController::class, 'likeSystem'])->name('home.likeSystem');
     Route::get('home/{event_id}/save', [EventController::class, 'saveSystem'])->name('home.saveSystem');
     Route::get('home/{event_id}/attend', [EventController::class, 'attendSystem'])->name('home.attendSystem');
+    Route::post('home/{event_id}/comment', [EventController::class, 'commentEvent'])->name('home.commentEvent');
+    Route::get('home/{event_id}/comment-delete', [EventController::class, 'removeComment'])->name('home.removeComment');
     // Galllery Forum Route
     Route::resource('/gallery-forum', GalleryController::class)->parameters([
         'gallery-forum' => 'gallery_id'
     ]);
     // Attending Events Route
-    Route::get('/attending-events/{id}', [AttendController::class, 'index'])->name('attending-events');
+    Route::get('/attending-events', [AttendController::class, 'index'])->name('attending-events');
 
     // Messages route
     Route::get('/chat', [MessageController::class, 'index'])->name('chat');
 
     // Freinds route
     Route::get('/friends', [FriendController::class, 'index'])->name('friends');
-
+    Route::get('/friends/{id}/accept', [FriendController::class, 'accept'])->name('accept');
+    Route::get('/friends/{id}/unfriend', [FriendController::class, 'unfriend'])->name('remove');
+    Route::get('/friends/{id}/addfriend', [FriendController::class, 'addFriend'])->name('addfriend');
     // Saved Events route
     Route::get('/saved-events', [SavedEventsController::class, 'index'])->name('saved-events');
     

@@ -17,7 +17,7 @@
         <div class="col-2 m-0 p-0">
 
                 <!-- Navigation Side Bar -->
-            <div style="height: 100vh" class="d-flex flex-column flex-shrink-0 p-3 navbarP" style="width: 280px;">
+            <div style="height: 100vh" class="d-flex flex-column flex-shrink-0 p-3 navbarP" style="max-width: 280px; min-width: 280px;">
                 <a href="{{ route('home.index') }}" class="d-flex w-100 align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <div class="d-flex align-items-center justify-content-center mt-2 w-100">
                     <img src="{{ asset('images/Logologosm.png') }}" alt="Logo">
@@ -73,7 +73,7 @@
                 <div class="dropdown">
                 <a href="#" class="d-flex align-items-center navbarLinksCustom text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="{{ asset('storage/avatars/'.Auth::user()->image) }}" alt="" width="32" height="32" class="rounded-circle me-2 object-fit-cover">
-                    <strong>{{ Auth::user()->name }}</strong>
+                    <strong class="small">{{ Auth::user()->name }}</strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="{{ route('settings') }}">Settings</a></li>

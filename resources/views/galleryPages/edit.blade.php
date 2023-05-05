@@ -6,7 +6,7 @@
 
     <!-- Alerts -->
     @if (session('success'))
-    <div class="alert alert-warning customAlert alert-dismissible fade show text-light border-0" role="alert">
+    <div class="alert alert-warning customAlert alert-dismissible fade show text-light border-0 my-5 m-5" role="alert">
         <strong>Update Successfull</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

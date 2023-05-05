@@ -43,13 +43,13 @@ class Event extends Model
         return $this->hasMany(Comment::class);
     }
     public function savedEvents(){
-        return $this->hasMany(SavedEvents::class);
+        return $this->belongsToMany(User::class, 'saved_events');
     }
     public function likes(){
         return $this->hasMany(Likes::class);
     }
     public function attending(){
-        return $this->hasMany(Attending::class);
+        return $this->belongsToMany(User::class, 'attendings');
     }
     public function tags(){
         return $this->belongsToMany(Tags::class, 'event__tags', 'event_id', 'tag_id');
