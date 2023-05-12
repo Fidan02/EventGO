@@ -9,41 +9,109 @@
         <h3 class="text-light">Create an Event</h3>
     </div>
     <div class="container my-5">
-        <form action="#" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('home.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="editMain d-flex gap-3 justify-content-around container">
             <!-- Left Side of the edit -->
                 <div class="container editLeft">
                     <div class="EditTitle inputBG">
-                        <input type="text" class="form-control" placeholder="Add Title">
+                        <input type="text" class="form-control" name="title" placeholder="Add Title">
                     </div>
                     <div class="Location my-5">
                         <div class="cityCountryEdit gap-5 d-flex justify-content-between container my-3">
-                            <div class="dropdown w-100">
+                            @if(Request::input('country') !== null)
+                                <div class="dropdown w-100">
+                                    @php 
+                                        $country_id = Request::input('country');
+                                    @endphp
+                                    <button class="dropdown-toggle countryButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @foreach($country as $ct)
+                                            @if($country_id == $ct->id)
+                                                {{ $ct->country_name }}
+                                            @endif
+                                        @endforeach
+                                    </button>
+                                @if($country && count($country) > 0)
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        @foreach($country as $ct)
+                                        <li><a class="dropdown-item" href="?country={{ $ct->id }}">{{ $ct->country_name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                @endif 
+                                </div>
+                            @else
+                                <div class="dropdown w-100">
                                 <button class="dropdown-toggle countryButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Country
                                 </button>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                                </ul>
+                                @if($country && count($country) > 0)
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        @foreach($country as $ct)
+                                        <li><a class="dropdown-item" href="?country={{ $ct->id }}">{{ $ct->country_name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                @endif 
+                                </div>
+                            @endif
+                                
+                            @if(Request::input('country') !== null)
+                            <div class="inputBG country">
+                                @if(Request::input('city') !== null)
+                                <div class="dropdown">
+                                        @php 
+                                            $city_id = Request::input('city');
+                                        @endphp
+                                    <button class="inputBG dropdown-toggle cityButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @foreach($city as $ct)
+                                            @if($city_id == $ct->id)
+                                                {{ $ct->city_name }}
+                                            @endif
+                                        @endforeach
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                    @if($city && count($city) > 0)
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                            @foreach($city as $ci)
+                                                @if($country_id == $ci->country_id)
+                                                    <li><a class="dropdown-item" href="?country={{ $ci->country_id }}&city={{ $ci->id }}">{{ $ci->city_name }}</a></li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    @endif 
+                                    </ul>
+                                </div>
+                                @else
+                                <div class="dropdown">
+                                    <button class="inputBG dropdown-toggle cityButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        City
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                    @if($city && count($city) > 0)
+                                            @foreach($city as $ci)
+                                                @if($country_id == $ci->country_id)
+                                                    <li><a class="dropdown-item" href="?country={{ $ci->country_id }}&city={{ $ci->id }}">{{ $ci->city_name }}</a></li>
+                                                @endif
+                                            @endforeach
+                                    @endif 
+                                    </ul>
+                                </div>
+                                @endif
                             </div>
+                            @else
                             <div class="inputBG country">
                                 <div class="dropdown">
                                     <button class="inputBG dropdown-toggle cityButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         City
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-dark">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                        <li><a class="dropdown-item" href="#">Select a Country First!</a></li>
                                     </ul>
                                 </div>
                             </div>
+                            @endif
                         </div>
+
+
                         <div class="address mb-3 w-75 inputBG">
                             <input type="text" class="form-control" placeholder="Add Street Address">
                         </div>
@@ -51,46 +119,18 @@
                     <div class="editImage d-flex inputBG flex-column align-items-center">
                         <input class="form-control" type="file" id="event_image" name="event_image" placeholder="Add Image">
                     </div>
-                    <div class="tags my-5 d-flex gap-3">
-                        <div class="tag1">
-                            <div class="dropdown">
-                            <button class="inputBG dropdown-toggle cityButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tag 1
-                            </button>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                                </ul>
-                            </div>
+                    <div class="tags my-5">
+                        <h6 class="text-light" >Tags:</h6>
+                        @if($tags)
+                        <div class="container tag-container d-flex row">
+                            @foreach($tags as $tag)
+                            <p class="d-inline-block col-4">
+                                <input type="checkbox" name="tags[]" class="tag-checkbox" value="{{ $tag->id }}" id="{{ $tag->tag_name }}" />
+                                <label class="text-light" for="{{$tag->tag_name}}">{{$tag->tag_name}}</label>
+                            </p>
+                            @endforeach
                         </div>
-                        <div class="tag1">
-                            <div class="dropdown">
-                            <button class="inputBG dropdown-toggle cityButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tag 1
-                            </button>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="tag1">
-                            <div class="dropdown">
-                            <button class="inputBG dropdown-toggle cityButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tag 1
-                            </button>
-                                <ul class="dropdown-menu dropdown-menu-dark">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        @endif
                     </div>
 
                 </div>
@@ -107,20 +147,9 @@
                     </div>
                         <br><br><br>
                     <div class="EditText inputBG">
-                        <textarea name="event_desc" id="event_desc" cols="30" rows="10" placeholder="Event Bio"></textarea>
+                        <textarea name="event_desc" id="event_desc" cols="30" rows="10" class="p-1" style="resize: none;" placeholder="Event Bio"></textarea>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
 
             </div>
 
@@ -131,4 +160,29 @@
             </div>
         </form>
     </div>
+@endsection
+
+@section('js')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    let checked = document.querySelectorAll('input.tag-checkbox');
+    let tags = 0;
+
+    checked.forEach(tag => {
+        tag.addEventListener('change', function() {
+        if (this.checked) {
+            tags++;
+        } else {
+            tags--;
+        }
+
+        if (tags > 3) {
+            this.checked = false;
+            tags--;
+            alert('Maximum 3 tags Is allowed');
+        }
+        });
+    });
+    });
+</script>
 @endsection

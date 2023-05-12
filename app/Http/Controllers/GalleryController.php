@@ -32,7 +32,22 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'caption' => ['string', 'nullable'],
+            'image' => ['image', 'required']
+        ]);
+
+        if($request->hasfile('image')){
+            $file = $request['image']->getClientOriginalName();
+            $image = time()."_".pathinfo($file, PATHINFO_FILENAME) . "." . pathinfo($file, PATHINFO_EXTENSION);
+            Storage::putFileAs('public/gallery/', $request['image'], $image);
+        
+            if(Gallery::create(['user_id' => auth()->id(), 'caption' => $request->caption, 'image' => $image])) {
+                return redirect()->route('profile');
+            }
+        }
+
+
     }
 
     /**
@@ -93,9 +108,9 @@ class GalleryController extends Controller
 
 
         if($gallery->delete()){
-            return redirect()->route('gallery-forum.index')->with('success', 'Gallery deleted successfully.');
+            return redirect()->back()->with('success', 'Gallery deleted successfully.');
         }else{
-            return redirect()->route('gallery-forum.index')->with('error', 'Something went wrong.');
+            return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
 }

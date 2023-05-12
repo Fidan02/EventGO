@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Friends;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +19,20 @@ class ProfileController extends Controller
 
     function index(){
         $users = User::where('id', auth()->id())->first();
+        $friends = Friends::where(function ($query) {
+            $query->where('user_id', auth()->id())
+            ->orWhere('friend_id', auth()->id());
+        })->where('status', 'accepted')->get();
         return view('profile.profile', [
             'users' => $users,
+            'friends' => $friends
+        ]);
+    }
+
+    function userEvents(){
+        $events = Event::where('user_id', auth()->id())->get();
+        return view('EventPages.userCreatedEvents', [
+            'events' => $events
         ]);
     }
 

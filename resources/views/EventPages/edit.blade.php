@@ -100,7 +100,7 @@
                     </div>
                         <br><br><br>
                     <div class="EditText inputBG">
-                        <textarea name="event_desc" id="event_desc" cols="30" rows="10"></textarea>
+                        <textarea name="event_desc" id="event_desc" style="resize: none;" cols="30" rows="10"></textarea>
                     </div>
                 </div>
 

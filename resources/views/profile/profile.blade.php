@@ -25,13 +25,21 @@
                 <div class="container">
                     <div class="profileFriends_Amount my-1">
                         <a href="{{ route('friends') }}" class="text-decoration-none text-light">Friends:
-                            @if($users->friends->count() > 0)
-                                {{ $users->friends->count() }}
+                            @if(count($friends) > 0)
+                                {{ $friends->count() }}
+                            @else
+                                0
                             @endif
                         </a>
                     </div>
                     <div class="profileEvents my-1">
-                        <a href="" class="text-decoration-none text-light">Events: 10</a>
+                        <a href="{{ route('user-events') }}" class="text-decoration-none text-light">Events:
+                            @if($users->events->count() > 0)
+                                {{ $users->events->count() }}
+                            @else
+                                0
+                            @endif
+                        </a>
                     </div>
                 </div>
                 <div class="profileEDIT my-1">
@@ -95,12 +103,16 @@
                                 <div class="d-flex gap-2">
                                     <div class="container editGalleryBTN">
                                         <h6 class="text-light mt-2">
-                                        <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.destroy', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-trash text-danger"></i></a>
+                                            <form class="p-0" action="{{ route('gallery-forum.destroy', ['gallery_id' => $gl->id])}}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="deleteGalleryBTN p-1 text-light fs-5" type="submit"><i class="fa-solid fa-trash text-danger"></i></button>
+                                            </form>
                                         </h6>
                                     </div>
                                     <div class="container editGalleryBTN">
                                         <h6 class="text-light mt-2">
-                                        <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_id' => 'anythign'])}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <a class="text-light mt-1 fs-5" href="{{ route('gallery-forum.edit', ['gallery_id' => $gl->id])}}"><i class="fa-solid fa-pen-to-square"></i></a>
                                         </h6>
                                     </div>
                                 </div>

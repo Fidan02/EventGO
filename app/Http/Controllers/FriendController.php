@@ -71,7 +71,7 @@ class FriendController extends Controller
         if($friend){
             $friend->status = 'accepted';
             $friend->save();
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Made a new friend!');
         }
 
         return redirect()->back();
@@ -80,7 +80,7 @@ class FriendController extends Controller
         $friend = Friends::where('friend_id', $id)->first();
         $friend->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with('removed', 'Removed Friend!');
     }
     function addFriend($id){
         Friends::create([
@@ -88,6 +88,6 @@ class FriendController extends Controller
             'friend_id' => $id
         ]);
 
-        return redirect()->back()->with('status', 'Request Sent!');
+        return redirect()->back()->with('added', 'Request Sent!');
     }
 }

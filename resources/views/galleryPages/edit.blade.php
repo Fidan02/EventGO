@@ -35,7 +35,7 @@
                 <input type="image" src="{{ asset('storage/gallery/'. $gallery->image) }}" height="120" class="my-3 rounded object-fit-cover" name="gallery_image">
             </div>
             <div class="EditText inputBG">
-                <textarea name="caption" id="caption" cols="30" rows="10" placeholder="Add caption" class="p-2">{{ $gallery->caption }}</textarea>
+                <textarea name="caption" id="caption" cols="30" rows="10" style="resize: none;" placeholder="Add caption" class="p-2">{{ $gallery->caption }}</textarea>
             </div>
             <div class="container EditBTN d-flex justify-content-center my-5">
                 <button type="submit">

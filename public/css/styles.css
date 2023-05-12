@@ -511,6 +511,33 @@
     background: var(--purpleBlueLinear-gradient);
     color: white;
 }
+.tags{
+    border-style: solid;
+    border-width: 2px;
+    border-image: var(--purpleBlueLinear-gradient) 1;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+}
+
+.tag-container{
+    overflow-y: auto;
+    height: 200px;
+}
+.tag-container::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.tag-container::-webkit-scrollbar-thumb {
+    background-color: transparent; 
+    border-radius: 5px;
+}
+
+.tag-container::-webkit-scrollbar-track {
+    background-color: transparent;
+}
 
 
 /* Gallery Page */
@@ -582,8 +609,13 @@
 }
 
 .suggested-container{
-    background-color: var(--darkBlue-color);
+    background: var(--darkBlue-color);
     padding: 5px;
+    border-radius: 10px;
+}
+
+.sug-friend{
+    background: var(--mainbg-theme);
     border-radius: 10px;
 }
 
@@ -596,6 +628,20 @@
     height: 98vh;
     background-color: var(--darkBlue-color);
     overflow: auto;
+}
+
+.friends-message::-webkit-scrollbar {
+    width: 10px;
+    height: 5px; 
+}
+
+.friends-message::-webkit-scrollbar-thumb {
+    background: transparent; 
+    border-radius: 5px;
+}
+
+.friends-message::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 .not-selected{
     background-color: var(--mainbg-theme);
@@ -611,6 +657,30 @@
 .chatMessages{
     height: calc(100% - 40px);
     overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.chatMessages::-webkit-scrollbar {
+    width: 0px;
+    height: 0px; 
+}
+
+.chatMessages::-webkit-scrollbar-thumb {
+    background: transparent; 
+    border-radius: 5px;
+}
+
+.chatMessages::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.newChatBtn{
+    width: 150px;
+    padding: 10px;
+    background: var(--purpleBlueLinear-gradient);
+    color: white;
+    border: none;
+    border-radius: 9px;
 }
 
 .senderMsg{
@@ -675,6 +745,37 @@
     overflow: auto;
     color: white; 
     margin-bottom: 1px;
+}
+
+.messagerGallery::-webkit-scrollbar {
+    width: 0px;
+    height: 0px; 
+}
+
+.messagerGallery::-webkit-scrollbar-thumb {
+    background: transparent; 
+    border-radius: 5px;
+}
+
+.messagerGallery::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.modal-content {
+    background-color: #0F1E33 !important;
+    color: #fff !important;
+    border-radius: 15px !important;
+    border: 2px solid #fff !important;
+}
+
+.form-control {
+    color: #fff !important;
+    border-radius: 10px !important;
+    border: none !important;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
 }
 
 
@@ -745,6 +846,14 @@
 
 .customAlert{
     background: var(--violetLinear-gradient);
+}
+.customAlerttwo{
+    background: var(--darkBlue-color);
+    color: white;
+}
+.customAlert3{
+    background: var(--mainbg-theme);
+    color: white;
 }
 
 .profileName > input {

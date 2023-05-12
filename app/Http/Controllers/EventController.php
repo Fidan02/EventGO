@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Tags;
+use App\Models\User;
 use App\Models\Event;
 use App\Models\Likes;
 use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Attending;
 use App\Models\SavedEvents;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -30,7 +31,15 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('EventPages.create');
+        $tags = Tags::all();
+        $country = Country::all();
+        $city = City::all();
+        
+        return view('EventPages.create', [
+            'tags' => $tags,
+            'country' => $country,
+            'city' => $city
+        ]);
     }
 
     /**
@@ -38,7 +47,15 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'tags' => 'required',
+            'title' => 'required|max:155|min:2',
+        ]);
+
+        if(count($request->tags) > 3)
+            return redirect()->back()->with('status', 'Max 3 tags');
+
+        return $request;
     }
 
     /**

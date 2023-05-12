@@ -54,6 +54,8 @@ Route::middleware([
 
     // Messages route
     Route::get('/chat', [MessageController::class, 'index'])->name('chat');
+    Route::post('/chat/send', [MessageController::class, 'sendMessage'])->name('sendMessage');
+    Route::get('/chat/{sender_id}/delete', [MessageController::class, 'deleteMessage'])->name('deleteMessage');
 
     // Freinds route
     Route::get('/friends', [FriendController::class, 'index'])->name('friends');
@@ -67,6 +69,7 @@ Route::middleware([
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/user-events', [ProfileController::class, 'userEvents'])->name('user-events');
     Route::get('/profile/edit-profile', [ProfileController::class, 'editProfile'])->name('profile-edit');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('update');
     Route::put('/profile/password-update', [ProfileController::class, 'passwordUpdate'])->name('password-update');

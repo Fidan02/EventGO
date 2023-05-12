@@ -53,7 +53,7 @@
                             </div>
                             <div class="profileBio text-center d-flex flex-column mt-3 text-light">
                                 <label for="bio">Bio</label>
-                                <textarea name="bio" id="bio" cols="30" rows="10" value="{{ Auth::user()->bio }}">{{ Auth::user()->bio }}</textarea>
+                                <textarea name="bio" id="bio" cols="30" rows="6" style="resize: none;" value="{{ Auth::user()->bio }}">{{ Auth::user()->bio }}</textarea>
                             </div>
                         </div>
                         <div class="container updateProfile d-flex justify-content-center my-2">

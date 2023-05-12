@@ -3,6 +3,15 @@
 @section('title', 'Friends')
 
 @section('content')
+    @if(session('added'))
+        <div class="alert my-5 w-25 customAlerttwo alert-dismissible fade show text-light border-1 border-light rounded" role="alert">
+            <strong>Added new Friend!</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+
+
     <div class="container text-light mt-4 mb-3">
         <h1>Friends:</h1>
     </div>
@@ -115,7 +124,7 @@
             @if($people && count($people) > 0)
                 @foreach($people as $person)
                     @if( $person->id !== auth()->id())
-                        <div class="accepted friend my-1 d-flex">
+                        <div class="sug-friend friend my-1 d-flex">
                             <div class="friend-img">
                                 <a href="#" class="host-image d-flex justify-content-center align-items-center">
                                     <img src="{{ asset('images/avatar.png') }}" alt="Host Image" style="width: 60px; height: 60px;">
