@@ -96,7 +96,7 @@
             <div class="w-100 my-3 d-flex flex-wrap justify-content-center gap-3 container">
                 @foreach($users->galleries as $gl)
                     <div class="card bg-dark text-white" style="min-width: 400px; max-width: 400px;">
-                        <img src="{{ asset('storage/gallery/'. $gl->image)}}" class="card-img" alt="Stony Beach"/>
+                        <img src="{{ asset('storage/gallery/'. $gl->image)}}" class="card-img object-fit-cover" alt="Stony Beach"/>
                         <div class="card-img-overlay d-flex flex-column">
                             <!-- For the country and date -->
                             <div class="d-flex justify-content-end">

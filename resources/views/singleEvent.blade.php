@@ -34,6 +34,16 @@
                     <div class="singleevent-edit-btn "> 
                         <a class="text-light mt-1 fs-5" href="{{ route('home.edit', ['event_id' => $event->id])}}"><i class="fa-solid fa-pen-to-square"></i></a>
                     </div>
+                    <form action="{{ route('home.destroy', ['event_id' => $event->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+
+                        <div class="singleevent-edit-btn">
+                            <button type="submit" class="text-danger mt-1 deleteEventButton fs-5" onclick="return confirm('Are you sure you want to delete this event?')">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </form>
                 @endif
                 </div>
             </div>

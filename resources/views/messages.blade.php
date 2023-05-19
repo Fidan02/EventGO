@@ -45,11 +45,18 @@
 
         <!-- Chatbox -->
         <div class="chatroom w-100 my-1">
-            @if(Request::input('sender') !== null)
-            @php 
-                $sender_id = Request::input('sender');
-                $_messages = App\Models\Message::get();
-                $msgs = [];
+    @if(Request::input('sender') !== null)
+        @php 
+            $sender_id = Request::input('sender');
+            $_messages = App\Models\Message::where(function($query) use ($sender_id){
+                $query->where('sender_id', $sender_id)
+                    ->where('reciever_id', auth()->id());
+            })->orWhere(function($query) use ($sender_id){
+                $query->where('sender_id', auth()->id())
+                    ->where('reciever_id', $sender_id);
+            })->orderBy('created_at', 'asc')->get();
+
+            $msgs = [];
 
                 foreach($_messages as $message){
                     if( 
@@ -60,39 +67,60 @@
                         $msgs[] = $message;
                     }
                 }
-            @endphp
-                @if($msgs && count($msgs))
-                <div class="container chatMessages">
-                    @foreach($msgs as $msg)
-                    @if($msg->reciever_id == auth()->id())
-                        <div>
-                            <div class="small senderMsg my-1">
+        @endphp
+        <div class="container chatMessages">
+            @foreach($msgs as $msg)
+                @if($msg->reciever_id == auth()->id())
+                    <div>
+                        <div class="small senderMsg my-1">
                             {{ $msg->message }}
-                            </div>
                         </div>
-                    @else
-                        <div>
-                            <div class="small recieverMsg my-1">
-                            {{ $msg->message }}
-                            </div>
-                        </div>
-                    @endif
-                    @endforeach
-                </div>
-                @endif
-
-            <div class="sendMessage">
-                <form action="{{ route('sendMessage') }}" method="POST">
-                    @csrf
-                    <div class="d-flex messageInput">
-                        <input type="hidden" name="sender_id" value="{{ Request::input('sender') }}">
-                        <input type="text" class="w-75 form-control" name="message" placeholder="Message...">
-                        <button type="submit" class="w-25">Send</button>
                     </div>
-                </form>
-            </div>
-            @endif
+                @else
+                    <div>
+                        <div class="small recieverMsg my-1">
+                            {{ $msg->message }}
+                        </div>
+                    </div>
+                @endif
+            @endforeach
         </div>
+
+        <div class="sendMessage">
+            <form id="sendMessageForm" action="{{ route('sendMessage') }}" method="POST">
+                @csrf
+                <div class="d-flex messageInput">
+                    <input type="hidden" name="sender_id" value="{{ Request::input('sender') }}">
+                    <input type="text" class="w-75 form-control" name="message" placeholder="Message...">
+                    <button type="submit" class="w-25">Send</button>
+                </div>
+            </form>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // Set interval to periodically check for new messages
+                setInterval(function() {
+                    var lastMessageId = $('.chatMessages .senderMsg:last').attr('data-id');
+                    var senderId = $('input[name="sender_id"]').val();
+                    var fileData = new FormData();
+                    fileData.append("sender_id", senderId);
+                    fileData.append("lastMessageId", lassMessageId);
+                    $.ajax({
+                        url: '/chat',
+                        type: 'POST',
+                        data: fileData,
+                        success: function(response) {
+                            // Append new messages to the chat
+                            $('.chatMessages').append(response);
+                        }
+                    });
+                }, 1000); // 5 seconds interval
+            });
+        </script>
+    @endif
+</div>
 
         <!-- Messager Information -->
         <div class="messenger-profile w-50 my-1">

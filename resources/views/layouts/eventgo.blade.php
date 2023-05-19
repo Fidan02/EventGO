@@ -76,7 +76,6 @@
                     <strong class="small">{{ Auth::user()->name }}</strong>
                 </a>
                 <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="{{ route('settings') }}">Settings</a></li>
                     <li><a class="dropdown-item" href="{{ route('profile') }}">Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li>

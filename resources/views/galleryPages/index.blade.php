@@ -23,9 +23,9 @@
     @endif
 
     @if($gallery && count($gallery) > 0)
-        <div class="row gap-3 d-flex justify-content-start ">
+        <div class="row gap-5 d-flex my-5 justify-content-center ">
             @foreach($gallery as $gl)
-                <div class="col-3 my-5 p-0 m-0">
+                <div class="col-3 my-1 p-0 m-0">
                     <div class="card bg-dark text-white" style="max-width: 700px;">
                         <img src="{{ asset('storage/gallery/'. $gl->image)}}" class="card-img object-fit-cover" alt="Stony Beach"/>
                         <div class="card-img-overlay d-flex flex-column">
