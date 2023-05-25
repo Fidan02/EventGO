@@ -185,9 +185,9 @@
                                 @if(count($friends))
                                     @foreach($friends as $friend)
                                         @if($friend->friend_id == auth()->id())
-                                            <option value="{{ App\Models\User::find($friend->user_id)->id }}">{{ App\Models\User::find($friend->user_id)->name }}</option>
+                                            <option class="text-dark" value="{{ App\Models\User::find($friend->user_id)->id }}">{{ App\Models\User::find($friend->user_id)->name }}</option>
                                         @else
-                                            <option value="{{ App\Models\User::find($friend->friend_id)->id }}">{{ App\Models\User::find($friend->friend_id)->name }}</option>
+                                            <option class="text-dark" value="{{ App\Models\User::find($friend->friend_id)->id }}">{{ App\Models\User::find($friend->friend_id)->name }}</option>
                                         @endif
                                     @endforeach
                                 @endif
@@ -195,7 +195,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text" name="message"></textarea>
+                            <textarea class="form-control text-dark" id="message-text" name="message"></textarea>
                         </div>
                     
                 </div>
